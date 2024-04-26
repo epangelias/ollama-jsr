@@ -1,4 +1,4 @@
-import { Chat } from "../mod.ts";
+import { Chat, GetModels } from "../mod.ts";
 import { ChatMessage } from "../types.ts";
 
 const messages: ChatMessage[] = [
@@ -8,7 +8,14 @@ const messages: ChatMessage[] = [
     }
 ];
 
-console.log("\nDENO OLLAMA CHAT DEMO: CTRL-C to Exit\n");
+const models = await GetModels();
+
+console.log(models.map((model, i) => `[${i}] ${model.name}`).join("\n"));
+const modelID = prompt("\nSelect Model:") || "0";
+
+const model = models[+modelID] || models[0];
+
+console.log("Using model: " + model.name + "\n");
 
 while (true) {
     const q = await prompt(">>>");
@@ -19,7 +26,7 @@ while (true) {
         return true;
     }
 
-    await Chat({ messages }, updater);
+    await Chat({ messages, model: model.model }, updater);
 
     console.log();
 }

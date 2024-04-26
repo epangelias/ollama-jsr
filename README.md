@@ -1,6 +1,11 @@
 # @epi/ollama
 Simple interface to the Ollama API
 
+### Run Chat Example
+```bash
+deno run -A https://esm.sh/jsr/@epi/ollama/examples/chat.ts
+```
+
 ## Example
 ```ts
 import { Chat } from "@epi/ollama";

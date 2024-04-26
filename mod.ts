@@ -1,4 +1,4 @@
-import { Options, SetOptions } from "./types.ts";
+import { Model, Options, SetOptions } from "./types.ts";
 
 const defaultOptions: Options = {
     API_URL: 'http://localhost:11434/api/chat',
@@ -13,8 +13,9 @@ const defaultOptions: Options = {
 
 /**
  * Access the Ollama API
+ * @param setOptions Chat Configuration
+ * @param updater Function that is triggered on every token received by the stream
  */
-
 export async function Chat(setOptions: SetOptions, updater?: (text: string, token: string) => boolean): Promise<string> {
     const options = { ...defaultOptions, ...setOptions };
 
@@ -70,4 +71,12 @@ export async function Chat(setOptions: SetOptions, updater?: (text: string, toke
 }
 
 
-
+/**
+ * Get list of Ollama models
+ */
+export async function GetModels(url = "http://localhost:11434/api/tags"): Promise<Model[]> {
+    const req = await fetch(url);
+    if (!req.ok) throw new Error("Error fetching models");
+    const { models } = await req.json();
+    return models as Model[];
+}
