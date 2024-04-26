@@ -1,4 +1,4 @@
-import Chat from "../mod.ts";
+import { Chat } from "../mod.ts";
 import { ChatMessage } from "../types.ts";
 
 const messages: ChatMessage[] = [

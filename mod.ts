@@ -15,7 +15,7 @@ const defaultOptions: Options = {
  * Access the Ollama API
  */
 
-export default async function Chat(setOptions: SetOptions, updater?: (text: string, token: string) => boolean): Promise<string> {
+export async function Chat(setOptions: SetOptions, updater?: (text: string, token: string) => boolean): Promise<string> {
     const options = { ...defaultOptions, ...setOptions };
 
     const data = {
@@ -68,3 +68,6 @@ export default async function Chat(setOptions: SetOptions, updater?: (text: stri
 
     return text;
 }
+
+
+

@@ -3,7 +3,7 @@ Simple interface to the Ollama API
 
 ## Example
 ```ts
-import Chat from "@epi/ollama";
+import { Chat } from "@epi/ollama";
 
 const messages = [ { role: "user", content: "What is the meaning of life?" } ];
 
@@ -12,7 +12,7 @@ await Chat({messages}); // "The meaning of life is 42."
 
 ## Streaming
 ```ts
-import Chat from "@epi/ollama";
+import { Chat } from "@epi/ollama";
 
 const messages = [
     {
