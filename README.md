@@ -5,6 +5,15 @@ Simple interface to the Ollama API
 ```ts
 import Chat from "@epi/ollama";
 
+const messages = [ { role: "user", content: "What is the meaning of life?" } ];
+
+await Chat({messages});
+```
+
+## Streaming
+```ts
+import Chat from "@epi/ollama";
+
 const messages = [
     {
         role: "system",
