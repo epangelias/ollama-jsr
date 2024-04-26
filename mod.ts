@@ -1,7 +1,7 @@
 import { Model, Options, SetOptions } from "./types.ts";
 
 const defaultOptions: Options = {
-    API_URL: 'http://localhost:11434/api/chat',
+    API_URL: 'http://localhost:11434',
     model: "llama3",
     messages: [],
     stream: true,
@@ -29,7 +29,7 @@ export async function Chat(setOptions: SetOptions, updater?: (text: string, toke
 
     const controller = new AbortController();
 
-    const res = await fetch(options.API_URL, {
+    const res = await fetch(options + "/api/chat", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -73,11 +73,28 @@ export async function Chat(setOptions: SetOptions, updater?: (text: string, toke
 
 /**
  * Get list of Ollama models
- * @param url Endpoint to access model tags
+ * @param endpoint API Endpoint URL
  */
-export async function GetModels(url = "http://localhost:11434/api/tags"): Promise<Model[]> {
-    const req = await fetch(url);
+export async function GetModels(endpoint = defaultOptions.API_URL): Promise<Model[]> {
+    const req = await fetch(endpoint + "/api/tags");
     if (!req.ok) throw new Error("Error fetching models");
     const { models } = await req.json();
     return models as Model[];
+}
+
+
+/**
+ * Generate Embedding
+ * @param prompt Prompt to turn into embedding
+ * @param model Model to use
+ * @param endpoint API Endpoint URL
+ */
+export async function Embedding(prompt: string, model: string = defaultOptions.model, endpoint = defaultOptions.API_URL): Promise<number[]> {
+    const req = await fetch(endpoint + "/api/embeddings", {
+        method: "POST",
+        body: JSON.stringify({ model, prompt })
+    });
+    if (!req.ok) throw new Error("Error generating embedding");
+    const { embedding } = await req.json();
+    return embedding as number[];
 }
