@@ -1,8 +1,4 @@
 {
-  "tasks": {
-    "test": "deno test -A",
-    "chat": "deno run -A ./chat.ts"
-  },
   "name": "@epi/ollama",
   "version": "0.0.1",
   "exports": "./mod.ts"
