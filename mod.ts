@@ -73,6 +73,7 @@ export async function Chat(setOptions: SetOptions, updater?: (text: string, toke
 
 /**
  * Get list of Ollama models
+ * @param url Endpoint to access model tags
  */
 export async function GetModels(url = "http://localhost:11434/api/tags"): Promise<Model[]> {
     const req = await fetch(url);
