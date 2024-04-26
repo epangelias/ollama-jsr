@@ -7,7 +7,7 @@ import Chat from "@epi/ollama";
 
 const messages = [ { role: "user", content: "What is the meaning of life?" } ];
 
-await Chat({messages}); // 42
+await Chat({messages}); // "The meaning of life is 42."
 ```
 
 ## Streaming
