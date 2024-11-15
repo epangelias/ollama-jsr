@@ -29,7 +29,7 @@ export async function Chat(setOptions: SetOptions, updater?: (text: string, toke
 
     const controller = new AbortController();
 
-    const res = await fetch(options + "/api/chat", {
+    const res = await fetch(options.API_URL + "/api/chat", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
